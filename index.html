@@ -272,20 +272,68 @@
       transition: border-color 0.25s, transform 0.2s;
     }
     .proj-card:hover { border-color: var(--amber-dim); transform: translateY(-3px); }
-    .proj-img-placeholder {
-      width: 100%; height: 180px;
+
+    /* image gallery */
+    .proj-gallery {
+      position: relative; width: 100%; height: 190px;
       background: var(--surface2);
       border-bottom: 1px solid var(--border);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 10px;
+      overflow: hidden;
     }
-    .proj-img-placeholder .proj-ph-icon { font-size: 32px; opacity: 0.5; }
-    .proj-img-placeholder .proj-ph-text {
+    .gallery-track {
+      display: flex; height: 100%;
+      transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
+    }
+    .gallery-slide {
+      min-width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 8px;
+      flex-shrink: 0;
+    }
+    .gallery-slide img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .gallery-slide.placeholder {
+      background: var(--surface2);
+    }
+    .ph-icon { font-size: 28px; opacity: 0.45; }
+    .ph-label {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 10px; color: var(--text-dim);
+      font-size: 9.5px; color: var(--text-dim);
       text-transform: uppercase; letter-spacing: 0.1em;
     }
-    .proj-body { padding: 24px 26px 22px; }
+    /* prev / next arrows */
+    .gallery-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(14,17,23,0.72); border: 1px solid var(--border);
+      color: var(--text-mid); width: 28px; height: 28px;
+      border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; transition: color 0.2s, border-color 0.2s;
+      z-index: 2; padding: 0;
+    }
+    .gallery-btn:hover { color: var(--amber); border-color: var(--amber-dim); }
+    .gallery-btn.prev { left: 8px; }
+    .gallery-btn.next { right: 8px; }
+    /* hide arrows when only 1 slide */
+    .proj-gallery[data-count="1"] .gallery-btn { display: none; }
+    /* dots */
+    .gallery-dots {
+      position: absolute; bottom: 8px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 5px; z-index: 2;
+    }
+    .gallery-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--border); cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      border: none; padding: 0;
+    }
+    .gallery-dot.active { background: var(--amber); transform: scale(1.25); }
+    /* hide dots when only 1 slide */
+    .proj-gallery[data-count="1"] .gallery-dots { display: none; }
+
+    .proj-body { padding: 22px 24px 20px; }
     .proj-title {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 16px; font-weight: 600;
@@ -331,9 +379,15 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 10px; padding: 28px 32px;
-      display: flex; justify-content: space-between;
-      align-items: flex-start; flex-wrap: wrap; gap: 12px;
+      display: grid;
+      grid-template-columns: 72px 1fr auto;
+      gap: 0 24px;
+      align-items: start;
+      transition: border-color 0.25s;
     }
+    .edu-card:hover { border-color: var(--amber-dim); }
+    .edu-logo-col { display: flex; align-items: flex-start; padding-top: 2px; }
+    .edu-content {}
     .edu-degree {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 17px; font-weight: 600; color: var(--text);
@@ -395,6 +449,9 @@
       .exp-logo-col { flex-direction: row; align-items: center; gap: 14px; margin-bottom: 16px; }
       .exp-connector { display: none; }
       .contact-layout { grid-template-columns: 1fr; gap: 32px; }
+      .edu-card { grid-template-columns: 1fr; }
+      .edu-logo-col { margin-bottom: 14px; }
+      .edu-date { margin-top: 10px; }
       footer { padding: 20px; }
     }
 
@@ -614,10 +671,21 @@
     </div>
     <div class="proj-grid">
 
+      <!-- RCR Implant: 3 image slots -->
       <div class="proj-card">
-        <div class="proj-img-placeholder">
-          <div class="proj-ph-icon">🦴</div>
-          <div class="proj-ph-text">Add project image here</div>
+        <div class="proj-gallery" data-count="3">
+          <div class="gallery-track">
+            <div class="gallery-slide placeholder"><div class="ph-icon">🦴</div><div class="ph-label">Image 1 — implant design / CAD</div></div>
+            <div class="gallery-slide placeholder"><div class="ph-icon">🖨️</div><div class="ph-label">Image 2 — FDM / printing process</div></div>
+            <div class="gallery-slide placeholder"><div class="ph-icon">📊</div><div class="ph-label">Image 3 — tensile test results</div></div>
+          </div>
+          <button class="gallery-btn prev" onclick="galShift(this,-1)">‹</button>
+          <button class="gallery-btn next" onclick="galShift(this,1)">›</button>
+          <div class="gallery-dots">
+            <button class="gallery-dot active"></button>
+            <button class="gallery-dot"></button>
+            <button class="gallery-dot"></button>
+          </div>
         </div>
         <div class="proj-body">
           <div class="proj-title">Rotator Cuff Repair (RCR) Implant</div>
@@ -629,10 +697,21 @@
         </div>
       </div>
 
+      <!-- Breast Scaffold: 3 image slots -->
       <div class="proj-card">
-        <div class="proj-img-placeholder">
-          <div class="proj-ph-icon">🔬</div>
-          <div class="proj-ph-text">Add project image here</div>
+        <div class="proj-gallery" data-count="3">
+          <div class="gallery-track">
+            <div class="gallery-slide placeholder"><div class="ph-icon">🔬</div><div class="ph-label">Image 1 — lattice CAD model</div></div>
+            <div class="gallery-slide placeholder"><div class="ph-icon">🧱</div><div class="ph-label">Image 2 — pore structure / SEM</div></div>
+            <div class="gallery-slide placeholder"><div class="ph-icon">🖨️</div><div class="ph-label">Image 3 — printed scaffold</div></div>
+          </div>
+          <button class="gallery-btn prev" onclick="galShift(this,-1)">‹</button>
+          <button class="gallery-btn next" onclick="galShift(this,1)">›</button>
+          <div class="gallery-dots">
+            <button class="gallery-dot active"></button>
+            <button class="gallery-dot"></button>
+            <button class="gallery-dot"></button>
+          </div>
         </div>
         <div class="proj-body">
           <div class="proj-title">3D Breast Scaffold for Post-Mastectomy Regeneration</div>
@@ -644,10 +723,21 @@
         </div>
       </div>
 
+      <!-- EB-PBF: 3 image slots -->
       <div class="proj-card">
-        <div class="proj-img-placeholder">
-          <div class="proj-ph-icon">⚡</div>
-          <div class="proj-ph-text">Add project image here</div>
+        <div class="proj-gallery" data-count="3">
+          <div class="gallery-track">
+            <div class="gallery-slide placeholder"><div class="ph-icon">⚡</div><div class="ph-label">Image 1 — EB-PBF build</div></div>
+            <div class="gallery-slide placeholder"><div class="ph-icon">🔍</div><div class="ph-label">Image 2 — NIR / BSE imaging</div></div>
+            <div class="gallery-slide placeholder"><div class="ph-icon">🧮</div><div class="ph-label">Image 3 — CT scan / Python output</div></div>
+          </div>
+          <button class="gallery-btn prev" onclick="galShift(this,-1)">‹</button>
+          <button class="gallery-btn next" onclick="galShift(this,1)">›</button>
+          <div class="gallery-dots">
+            <button class="gallery-dot active"></button>
+            <button class="gallery-dot"></button>
+            <button class="gallery-dot"></button>
+          </div>
         </div>
         <div class="proj-body">
           <div class="proj-title">In-Situ Flaw Detection — Electron Beam Metal AM</div>
@@ -659,10 +749,19 @@
         </div>
       </div>
 
+      <!-- Digital Twin: 2 image slots -->
       <div class="proj-card">
-        <div class="proj-img-placeholder">
-          <div class="proj-ph-icon">🚗</div>
-          <div class="proj-ph-text">Add project image here</div>
+        <div class="proj-gallery" data-count="2">
+          <div class="gallery-track">
+            <div class="gallery-slide placeholder"><div class="ph-icon">🚗</div><div class="ph-label">Image 1 — SolidWorks model</div></div>
+            <div class="gallery-slide placeholder"><div class="ph-icon">📈</div><div class="ph-label">Image 2 — ANSYS stress / modal results</div></div>
+          </div>
+          <button class="gallery-btn prev" onclick="galShift(this,-1)">‹</button>
+          <button class="gallery-btn next" onclick="galShift(this,1)">›</button>
+          <div class="gallery-dots">
+            <button class="gallery-dot active"></button>
+            <button class="gallery-dot"></button>
+          </div>
         </div>
         <div class="proj-body">
           <div class="proj-title">Digital Twin — Vehicle Steering &amp; Suspension</div>
@@ -674,10 +773,19 @@
         </div>
       </div>
 
+      <!-- VP-SL: 2 image slots -->
       <div class="proj-card">
-        <div class="proj-img-placeholder">
-          <div class="proj-ph-icon">💡</div>
-          <div class="proj-ph-text">Add project image here</div>
+        <div class="proj-gallery" data-count="2">
+          <div class="gallery-track">
+            <div class="gallery-slide placeholder"><div class="ph-icon">💡</div><div class="ph-label">Image 1 — grayscale mask output</div></div>
+            <div class="gallery-slide placeholder"><div class="ph-icon">🖼️</div><div class="ph-label">Image 2 — surface quality comparison</div></div>
+          </div>
+          <button class="gallery-btn prev" onclick="galShift(this,-1)">‹</button>
+          <button class="gallery-btn next" onclick="galShift(this,1)">›</button>
+          <div class="gallery-dots">
+            <button class="gallery-dot active"></button>
+            <button class="gallery-dot"></button>
+          </div>
         </div>
         <div class="proj-body">
           <div class="proj-title">Gradient Light VP-SL Exposure Optimization</div>
@@ -689,10 +797,19 @@
         </div>
       </div>
 
+      <!-- CAD Pipeline: 2 image slots -->
       <div class="proj-card">
-        <div class="proj-img-placeholder">
-          <div class="proj-ph-icon">🧪</div>
-          <div class="proj-ph-text">Add project image here</div>
+        <div class="proj-gallery" data-count="2">
+          <div class="gallery-track">
+            <div class="gallery-slide placeholder"><div class="ph-icon">🧪</div><div class="ph-label">Image 1 — Onshape / nTop workflow</div></div>
+            <div class="gallery-slide placeholder"><div class="ph-icon">⚙️</div><div class="ph-label">Image 2 — optimized geometry output</div></div>
+          </div>
+          <button class="gallery-btn prev" onclick="galShift(this,-1)">‹</button>
+          <button class="gallery-btn next" onclick="galShift(this,1)">›</button>
+          <div class="gallery-dots">
+            <button class="gallery-dot active"></button>
+            <button class="gallery-dot"></button>
+          </div>
         </div>
         <div class="proj-body">
           <div class="proj-title">CAD-to-Topology Automation Pipeline</div>
@@ -797,7 +914,13 @@
     </div>
     <div class="edu-grid">
       <div class="edu-card">
-        <div>
+        <div class="edu-logo-col">
+          <div class="logo-placeholder">
+            <span class="logo-icon">🎓</span>
+            <span>NC State</span>
+          </div>
+        </div>
+        <div class="edu-content">
           <div class="edu-degree">MS in Mechanical Engineering</div>
           <div class="edu-school">NC State University · Raleigh, NC</div>
           <div class="edu-note">Thesis: "Photopolymerization of Epoxies using Anthracene Photosensitizer for DLP 3D Printing" — Dr. Henry Ware</div>
@@ -805,7 +928,13 @@
         <div class="edu-date">Jan 2023 – May 2025</div>
       </div>
       <div class="edu-card">
-        <div>
+        <div class="edu-logo-col">
+          <div class="logo-placeholder">
+            <span class="logo-icon">🏛️</span>
+            <span>Pondicherry Univ</span>
+          </div>
+        </div>
+        <div class="edu-content">
           <div class="edu-degree">BS in Mechanical Engineering</div>
           <div class="edu-school">Pondicherry University · India</div>
         </div>
@@ -871,17 +1000,49 @@
 
 <script>
   function showPage(id, btn) {
-    // hide all pages
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    // deactivate all nav buttons
     document.querySelectorAll('.nav-tabs button').forEach(b => b.classList.remove('active'));
-    // show target
     document.getElementById('page-' + id).classList.add('active');
-    // activate button — handle both element and event target
     if (btn && btn.classList) btn.classList.add('active');
-    // scroll to top
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
+
+  // ── GALLERY ──
+  // Store current index per gallery
+  function getGallery(btn) {
+    return btn.closest('.proj-gallery');
+  }
+  function setSlide(gallery, idx) {
+    const count = parseInt(gallery.dataset.count);
+    idx = (idx + count) % count; // wrap
+    gallery.dataset.current = idx;
+    gallery.querySelector('.gallery-track').style.transform = `translateX(-${idx * 100}%)`;
+    gallery.querySelectorAll('.gallery-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === idx);
+    });
+  }
+  function galShift(btn, dir) {
+    const gallery = getGallery(btn);
+    const current = parseInt(gallery.dataset.current || 0);
+    setSlide(gallery, current + dir);
+  }
+  // Init all galleries
+  document.querySelectorAll('.proj-gallery').forEach(g => {
+    g.dataset.current = 0;
+    g.querySelectorAll('.gallery-dot').forEach((dot, i) => {
+      dot.addEventListener('click', () => setSlide(g, i));
+    });
+  });
+
+  // Touch/swipe support for galleries
+  document.querySelectorAll('.proj-gallery').forEach(g => {
+    let startX = 0;
+    g.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    g.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) setSlide(g, parseInt(g.dataset.current || 0) + (dx < 0 ? 1 : -1));
+    });
+  });
 </script>
 </body>
 </html>
