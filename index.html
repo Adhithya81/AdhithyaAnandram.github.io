@@ -352,33 +352,85 @@
     }
     .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 
-    /* ── SKILLS ── */
-    .skills-grid {
+    /* ── CERTIFICATIONS ── */
+    .cert-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 24px;
     }
-    .skill-group {
+    .cert-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px; padding: 24px 26px;
+      border-radius: 10px; overflow: hidden;
+      transition: border-color 0.25s, transform 0.2s;
+      cursor: pointer;
     }
-    .skill-group-title {
+    .cert-card:hover { border-color: var(--amber-dim); transform: translateY(-3px); }
+
+    /* image area */
+    .cert-img-wrap {
+      width: 100%; aspect-ratio: 4/3;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden; position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cert-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .cert-card:hover .cert-img-wrap img { transform: scale(1.04); }
+
+    /* upload placeholder */
+    .cert-upload-label {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 10px; width: 100%; height: 100%;
+      cursor: pointer;
+    }
+    .cert-upload-label input[type="file"] { display: none; }
+    .cert-plus {
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 1.5px dashed var(--text-dim);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; color: var(--text-dim);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .cert-upload-label:hover .cert-plus { border-color: var(--amber); color: var(--amber); }
+    .cert-upload-hint {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px; color: var(--text-dim);
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+
+    /* lightbox */
+    .cert-lightbox {
+      display: none; position: fixed; inset: 0; z-index: 500;
+      background: rgba(0,0,0,0.88);
+      align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .cert-lightbox.open { display: flex; }
+    .cert-lightbox img {
+      max-width: 90vw; max-height: 88vh;
+      border-radius: 8px; box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+    }
+    .cert-lightbox-close {
+      position: absolute; top: 20px; right: 28px;
+      background: none; border: none; color: #fff;
+      font-size: 32px; cursor: pointer; line-height: 1;
+      opacity: 0.7; transition: opacity 0.2s;
+    }
+    .cert-lightbox-close:hover { opacity: 1; }
+
+    /* info strip */
+    .cert-info { padding: 16px 18px 18px; }
+    .cert-name {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 12px; font-weight: 600;
-      color: var(--amber); margin-bottom: 16px;
-      text-transform: uppercase; letter-spacing: 0.07em;
+      font-size: 14px; font-weight: 600; color: var(--text);
+      margin-bottom: 4px;
     }
-    .skill-list { display: flex; flex-direction: column; gap: 9px; }
-    .skill-item {
-      font-size: 13.5px; color: var(--text-mid);
-      display: flex; align-items: center; gap: 9px;
-    }
-    .skill-item::before {
-      content: '';
-      width: 4px; height: 4px; border-radius: 50%;
-      background: var(--amber-dim); flex-shrink: 0;
-    }
+    .cert-issuer { font-size: 12px; color: var(--amber); font-weight: 500; }
 
     /* ── EDUCATION ── */
     .edu-grid { display: flex; flex-direction: column; gap: 20px; }
@@ -480,7 +532,7 @@
     <li><button class="active" onclick="showPage('home', this)">Overview</button></li>
     <li><button onclick="showPage('experience', this)">Experience</button></li>
     <li><button onclick="showPage('projects', this)">Projects</button></li>
-    <li><button onclick="showPage('skills', this)">Skills</button></li>
+    <li><button onclick="showPage('certs', this)">Certifications</button></li>
     <li><button onclick="showPage('education', this)">Education</button></li>
     <li><button onclick="showPage('contact', this)">Contact</button></li>
   </ul>
@@ -827,84 +879,131 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════ SKILLS ════════════════════════════ -->
-<div class="page" id="page-skills">
+<!-- ═══════════════════════════ CERTIFICATIONS ════════════════════════════ -->
+<div class="page" id="page-certs">
   <div class="inner-page">
     <div class="page-header">
-      <div class="page-label">Capabilities</div>
-      <h2 class="page-title">Technical Skills</h2>
+      <div class="page-label">Credentials</div>
+      <h2 class="page-title">Certifications</h2>
     </div>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <div class="skill-group-title">Design &amp; Simulation</div>
-        <div class="skill-list">
-          <span class="skill-item">SolidWorks (CSWP)</span>
-          <span class="skill-item">Onshape CAD</span>
-          <span class="skill-item">nTop Topology Optimization</span>
-          <span class="skill-item">ANSYS FEA</span>
-          <span class="skill-item">AutoCAD</span>
-          <span class="skill-item">GD&amp;T / ASME Y14.5</span>
-          <span class="skill-item">DFM / DFA</span>
-          <span class="skill-item">Tolerance Stack-Up</span>
+    <div class="cert-grid" id="certGrid">
+
+      <!-- 1 CSWP -->
+      <div class="cert-card" onclick="openLightbox('./cert-cswp.png')">
+        <div class="cert-img-wrap">
+          <img src="./cert-cswp.png" alt="CSWP Certificate"
+               onerror="this.parentNode.innerHTML=uploadSlot('cert-cswp.png')" />
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">CSWP — Certified SolidWorks Professional</div>
+          <div class="cert-issuer">Dassault Systèmes</div>
         </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Additive Manufacturing</div>
-        <div class="skill-list">
-          <span class="skill-item">FDM (PLLA, TPC)</span>
-          <span class="skill-item">Extrusion-based Bioprinting</span>
-          <span class="skill-item">DLP / VP-SL</span>
-          <span class="skill-item">G-code Development</span>
-          <span class="skill-item">EB-PBF Metal AM</span>
-          <span class="skill-item">Process Parameter Optimization</span>
+
+      <!-- 2 CSWA -->
+      <div class="cert-card" onclick="openLightbox('./cert-cswa.png')">
+        <div class="cert-img-wrap">
+          <img src="./cert-cswa.png" alt="CSWA Certificate"
+               onerror="this.parentNode.innerHTML=uploadSlot('cert-cswa.png')" />
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">CSWA — Certified SolidWorks Associate</div>
+          <div class="cert-issuer">Dassault Systèmes</div>
         </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Quality &amp; Regulatory</div>
-        <div class="skill-list">
-          <span class="skill-item">ISO 13485 QMS</span>
-          <span class="skill-item">ISO 7 Cleanroom</span>
-          <span class="skill-item">CAPA / SOP Authoring</span>
-          <span class="skill-item">GMP Compliance</span>
-          <span class="skill-item">DOE / SPC / RCA</span>
-          <span class="skill-item">Six Sigma</span>
-          <span class="skill-item">OSHA</span>
+
+      <!-- 3 AM Associate -->
+      <div class="cert-card" onclick="openLightbox('./cert-am.png')">
+        <div class="cert-img-wrap">
+          <img src="./cert-am.png" alt="AM Associate Certificate"
+               onerror="this.parentNode.innerHTML=uploadSlot('cert-am.png')" />
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">Additive Manufacturing Associate</div>
+          <div class="cert-issuer">Dassault Systèmes</div>
         </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Characterization</div>
-        <div class="skill-list">
-          <span class="skill-item">Mechanical Testing</span>
-          <span class="skill-item">SEM</span>
-          <span class="skill-item">FTIR Spectroscopy</span>
-          <span class="skill-item">Rheology</span>
-          <span class="skill-item">CT Validation</span>
-          <span class="skill-item">Hardness &amp; Density</span>
+
+      <!-- 4 Ansys Hyperelasticity -->
+      <div class="cert-card" onclick="openLightbox('./cert-ansys.png')">
+        <div class="cert-img-wrap">
+          <img src="./cert-ansys.png" alt="Ansys Certificate"
+               onerror="this.parentNode.innerHTML=uploadSlot('cert-ansys.png')" />
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">Hyperelasticity Course Completion</div>
+          <div class="cert-issuer">Ansys</div>
         </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Programming &amp; Analysis</div>
-        <div class="skill-list">
-          <span class="skill-item">Python</span>
-          <span class="skill-item">MATLAB</span>
-          <span class="skill-item">LabVIEW</span>
-          <span class="skill-item">Statistical Analysis</span>
-          <span class="skill-item">PDM / PLM Systems</span>
+
+      <!-- 5 Reverse Engineering -->
+      <div class="cert-card" onclick="openLightbox('./cert-re.png')">
+        <div class="cert-img-wrap">
+          <img src="./cert-re.png" alt="Reverse Engineering Certificate"
+               onerror="this.parentNode.innerHTML=uploadSlot('cert-re.png')" />
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">Reverse Engineering Foundations: Product Design</div>
+          <div class="cert-issuer">LinkedIn Learning</div>
         </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Domain Knowledge</div>
-        <div class="skill-list">
-          <span class="skill-item">Medical Implant Design</span>
-          <span class="skill-item">Tissue Engineering</span>
-          <span class="skill-item">Biomaterials</span>
-          <span class="skill-item">Mechatronics</span>
-          <span class="skill-item">Material Selection</span>
-          <span class="skill-item">Precision Mechanism Design</span>
+
+      <!-- 6 Fusion 360 -->
+      <div class="cert-card" onclick="openLightbox('./cert-fusion360.png')">
+        <div class="cert-img-wrap">
+          <img src="./cert-fusion360.png" alt="Fusion 360 Certificate"
+               onerror="this.parentNode.innerHTML=uploadSlot('cert-fusion360.png')" />
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">Fusion 360 CAD/CAM/CAE</div>
+          <div class="cert-issuer">Autodesk</div>
         </div>
       </div>
+
+      <!-- 7 Lean Six Sigma -->
+      <div class="cert-card" onclick="openLightbox('./cert-sixsigma.png')">
+        <div class="cert-img-wrap">
+          <img src="./cert-sixsigma.png" alt="Lean Six Sigma Certificate"
+               onerror="this.parentNode.innerHTML=uploadSlot('cert-sixsigma.png')" />
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">Lean Six Sigma Foundations</div>
+          <div class="cert-issuer">LinkedIn Learning</div>
+        </div>
+      </div>
+
+      <!-- 8 GD&T -->
+      <div class="cert-card" onclick="openLightbox('./cert-gdt.png')">
+        <div class="cert-img-wrap">
+          <img src="./cert-gdt.png" alt="GD&T Certificate"
+               onerror="this.parentNode.innerHTML=uploadSlot('cert-gdt.png')" />
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">Introduction to GD&amp;T</div>
+          <div class="cert-issuer">LinkedIn Learning</div>
+        </div>
+      </div>
+
+      <!-- 9 OSHA -->
+      <div class="cert-card" onclick="openLightbox('./cert-osha.png')">
+        <div class="cert-img-wrap">
+          <img src="./cert-osha.png" alt="OSHA Certificate"
+               onerror="this.parentNode.innerHTML=uploadSlot('cert-osha.png')" />
+        </div>
+        <div class="cert-info">
+          <div class="cert-name">OSHA 10-Hour Outreach Training — General Industry</div>
+          <div class="cert-issuer">360 Training</div>
+        </div>
+      </div>
+
     </div>
   </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="cert-lightbox" id="certLightbox" onclick="closeLightbox(event)">
+  <button class="cert-lightbox-close" onclick="closeLightbox()">×</button>
+  <img id="certLightboxImg" src="" alt="Certificate" />
 </div>
 
 <!-- ═══════════════════════════ EDUCATION ════════════════════════════ -->
@@ -1053,6 +1152,32 @@
       if (Math.abs(dx) > 40) setSlide(g, parseInt(g.dataset.current || 0) + (dx < 0 ? 1 : -1));
     });
   });
+
+  // ── CERTIFICATIONS ──
+  // Helper: returns an upload-slot HTML string (used in onerror)
+  function uploadSlot(filename) {
+    return `<label class="cert-upload-label" title="Click to preview — images load from your GitHub folder">
+      <div class="cert-plus">+</div>
+      <span class="cert-upload-hint">${filename}</span>
+    </label>`;
+  }
+
+  // Lightbox open / close
+  function openLightbox(src) {
+    const lb = document.getElementById('certLightbox');
+    const img = document.getElementById('certLightboxImg');
+    img.src = src;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(e) {
+    // Close on backdrop click or explicit call
+    if (e && e.target !== document.getElementById('certLightbox') && e.target.tagName !== 'BUTTON') return;
+    document.getElementById('certLightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  // Keyboard close
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 </script>
 </body>
 </html>
