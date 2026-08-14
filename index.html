@@ -268,9 +268,9 @@
 
     /* ── PROJECTS ── */
     .proj-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-      gap: 24px;
+      display: flex; 
+      flex-direction: column; 
+      gap: 36px;
     }
     .proj-card {
       background: var(--surface);
@@ -282,7 +282,7 @@
 
     /* image gallery */
     .proj-gallery {
-      position: relative; width: 100%; height: 190px;
+      position: relative; width: 100%; height: 380px;
       background: var(--surface2);
       border-bottom: 1px solid var(--border);
       overflow: hidden;
@@ -296,9 +296,10 @@
       display: flex; flex-direction: column;
       align-items: center; justify-content: center; gap: 8px;
       flex-shrink: 0;
+      padding: 16px;
     }
     .gallery-slide img {
-      width: 100%; height: 100%; object-fit: cover;
+      width: 100%; height: 100%; object-fit: contain;
     }
     .gallery-slide.placeholder {
       background: var(--surface2);
@@ -326,12 +327,12 @@
     .proj-gallery[data-count="1"] .gallery-btn { display: none; }
     /* dots */
     .gallery-dots {
-      position: absolute; bottom: 8px; left: 50%;
+      position: absolute; bottom: 12px; left: 50%;
       transform: translateX(-50%);
-      display: flex; gap: 5px; z-index: 2;
+      display: flex; gap: 6px; z-index: 2;
     }
     .gallery-dot {
-      width: 6px; height: 6px; border-radius: 50%;
+      width: 8px; height: 8px; border-radius: 50%;
       background: var(--border); cursor: pointer;
       transition: background 0.2s, transform 0.2s;
       border: none; padding: 0;
@@ -511,6 +512,7 @@
       .edu-card { grid-template-columns: 1fr; }
       .edu-logo-col { margin-bottom: 14px; }
       .edu-date { margin-top: 10px; }
+      .proj-gallery { height: 260px; }
       footer { padding: 20px; }
     }
 
@@ -725,7 +727,7 @@
     </div>
     <div class="proj-grid">
 
-      <!-- Project 1 (Example with 4 Images) -->
+      <!-- Project 1 -->
       <div class="proj-card">
         <div class="proj-gallery" data-count="2">
           <div class="gallery-track">
@@ -734,12 +736,8 @@
           </div>
           <button class="gallery-btn prev" onclick="galShift(this,-1)">‹</button>
           <button class="gallery-btn next" onclick="galShift(this,1)">›</button>
-          <button class="gallery-btn next" onclick="galShift(this,2)">›</button>
-          <button class="gallery-btn next" onclick="galShift(this,3)">›</button>
           <div class="gallery-dots">
             <button class="gallery-dot active"></button>
-            <button class="gallery-dot"></button>
-            <button class="gallery-dot"></button>
             <button class="gallery-dot"></button>
           </div>
         </div>
@@ -753,18 +751,16 @@
         </div>
       </div>
 
-      <!-- Project 2 (Example with 2 Images) -->
+      <!-- Project 2 -->
       <div class="proj-card">
         <div class="proj-gallery" data-count="3">
           <div class="gallery-track">
             <div class="gallery-slide"><img src="./Research/Boundary_condition.png" alt="Boundary Condition" /></div>
             <div class="gallery-slide"><img src="./Research/tot_deformation.png" alt="Total Deformation" /></div>
-            <div class="gallery-slide"><img src="./Projects/von_mises.png" alt="Von-Mises Stress" /></div>
-            
+            <div class="gallery-slide"><img src="./Research/von_mises.png" alt="Von-Mises Stress" /></div>
           </div>
           <button class="gallery-btn prev" onclick="galShift(this,-1)">‹</button>
           <button class="gallery-btn next" onclick="galShift(this,1)">›</button>
-          <button class="gallery-btn next" onclick="galShift(this,2)">›</button>
           <div class="gallery-dots">
             <button class="gallery-dot active"></button>
             <button class="gallery-dot"></button>
@@ -781,12 +777,12 @@
         </div>
       </div>
 
-      <!-- Project 3 (Example with 3 Images) -->
+      <!-- Project 3 -->
       <div class="proj-card">
         <div class="proj-gallery" data-count="2">
           <div class="gallery-track">
             <div class="gallery-slide"><img src="./Research/topdown_dlp.png" alt="Topdown DLP" /></div>
-            <div class="gallery-slide"><img src="./Research/hybrid assembly.JPG" alt="Hybrid Printer" /></div>
+            <div class="gallery-slide"><img src="./Research/hybrid%20assembly.JPG" alt="Hybrid Printer" /></div>
           </div>
           <button class="gallery-btn prev" onclick="galShift(this,-1)">‹</button>
           <button class="gallery-btn next" onclick="galShift(this,1)">›</button>
@@ -805,19 +801,17 @@
         </div>
       </div>
 
-      <!-- Project 4 (Example with 4 Images) -->
+      <!-- Project 4 -->
       <div class="proj-card">
         <div class="proj-gallery" data-count="4">
           <div class="gallery-track">
-            <div class="gallery-slide"><img src="./Research/arrowhead stent-TMPTA.png" alt="Arrowhead stent" /></div>
+            <div class="gallery-slide"><img src="./Research/arrowhead%20stent-TMPTA.png" alt="Arrowhead stent" /></div>
             <div class="gallery-slide"><img src="./Research/Cuboid-ECSO.png" alt="Cuboid using ECSO resin" /></div>
-            <div class="gallery-slide"><img src="./Research/solid base-aspect ratio.png" alt="Pillars with aspect ratio" /></div>
-            <div class="gallery-slide"><img src="./Research/solid cone-hybrid resin.png" alt="Solid Cone" /></div>
+            <div class="gallery-slide"><img src="./Research/solid%20base-aspect%20ratio.png" alt="Pillars with aspect ratio" /></div>
+            <div class="gallery-slide"><img src="./Research/solid%20cone-hybrid%20resin.png" alt="Solid Cone" /></div>
           </div>
           <button class="gallery-btn prev" onclick="galShift(this,-1)">‹</button>
           <button class="gallery-btn next" onclick="galShift(this,1)">›</button>
-          <button class="gallery-btn next" onclick="galShift(this,2)">›</button>
-          <button class="gallery-btn next" onclick="galShift(this,3)">›</button>
           <div class="gallery-dots">
             <button class="gallery-dot active"></button>
             <button class="gallery-dot"></button>
@@ -835,19 +829,16 @@
         </div>
       </div>
 
-      <!-- Project 5 (Example with 1 Image - Dots and Arrows auto-hidden by CSS) -->
+      <!-- Project 5 -->
       <div class="proj-card">
         <div class="proj-gallery" data-count="3">
           <div class="gallery-track">
             <div class="gallery-slide"><img src="./Research/micro_textured_mold.png" alt="Micro textured mold" /></div>
             <div class="gallery-slide"><img src="./Research/cross_section.png" alt="Cross-section" /></div>
-            <div class="gallery-slide"><img src="./Research/pdms patch.jpg" alt="PDMS patch" /></div>
+            <div class="gallery-slide"><img src="./Research/pdms%20patch.jpg" alt="PDMS patch" /></div>
           </div>
-          <!-- Navigation elements included in code for easy future updates, but hidden by CSS -->
           <button class="gallery-btn prev" onclick="galShift(this,-1)">‹</button>
           <button class="gallery-btn next" onclick="galShift(this,1)">›</button>
-          <button class="gallery-btn next" onclick="galShift(this,2)">›</button>
-          
           <div class="gallery-dots">
             <button class="gallery-dot active"></button>
             <button class="gallery-dot"></button>
@@ -864,25 +855,22 @@
         </div>
       </div>
 
-      <!-- Project 6 (Example with 3 Images) -->
+      <!-- Project 6 -->
       <div class="proj-card">
         <div class="proj-gallery" data-count="4">
           <div class="gallery-track">
-            <div class="gallery-slide"><img src="./Research/stress on spring.png" alt="Stress Contour of Spring" /></div>
+            <div class="gallery-slide"><img src="./Research/stress%20on%20spring.png" alt="Stress Contour of Spring" /></div>
             <div class="gallery-slide"><img src="./Research/suspension.png" alt="Suspension system FBD" /></div>
             <div class="gallery-slide"><img src="./Research/modal_analysis.png" alt="Modal Analysis" /></div>
             <div class="gallery-slide"><img src="./Research/tot.png" alt="Total Deformation" /></div>
           </div>
           <button class="gallery-btn prev" onclick="galShift(this,-1)">‹</button>
           <button class="gallery-btn next" onclick="galShift(this,1)">›</button>
-          <button class="gallery-btn next" onclick="galShift(this,2)">›</button>
-          <button class="gallery-btn next" onclick="galShift(this,3)">›</button>
           <div class="gallery-dots">
             <button class="gallery-dot active"></button>
             <button class="gallery-dot"></button>
             <button class="gallery-dot"></button>
             <button class="gallery-dot"></button>
-            
           </div>
         </div>
         <div class="proj-body">
@@ -896,45 +884,43 @@
       </div>
 
       <!-- Project 7 -->
-<div class="proj-card">
-  <div class="proj-gallery" data-count="4">
-    <div class="gallery-track">
-      <div class="gallery-slide"><img src="./Research/output_image_NIR.png" alt="NIR raw image" /></div>
-      <div class="gallery-slide"><img src="./Research/output_image_CT269.png" alt="CT Porosity detection" /></div>
-      <div class="gallery-slide"><img src="./Research/output_image.png" alt="BSE Porosity detection" /></div>
-      <div class="gallery-slide"><img src="./Research/processed_image_IRdetection.png" alt="NIR IR detection" /></div>
-    </div>
-    <button class="gallery-btn prev" onclick="galShift(this,-1)">‹</button>
-    <button class="gallery-btn next" onclick="galShift(this,1)">›</button>
-    <div class="gallery-dots">
-      <button class="gallery-dot active"></button>
-      <button class="gallery-dot"></button>
-      <button class="gallery-dot"></button>
-      <button class="gallery-dot"></button>
-    </div>
-  </div>
-  <div class="proj-body">
-    <div class="proj-title">In-Situ Flaw Detection for Electron Beam Metal Additive Process</div>
-    <p class="proj-desc">
-      Real-time porosity detection and process parameter control for E-beam metal additive process helps to minimize print failure and material wastage. A Python program trained to detect porosity using CT and BSE data is used to identify pores from NIR data, used to adjust beam power, velocity, and hatch spacing.<br><br>
-      <strong style="color:var(--text)">Objective:</strong> Predict porosity for a given layer using NIR data and validate against CT and BSE.<br><br>
-      <strong style="color:var(--text)">Results:</strong> Higher accuracy detecting pores from NIR images vs BSE, with CT validation confirming effectiveness for real-time monitoring.
-    </p>
-  </div>
-</div>
+      <div class="proj-card">
+        <div class="proj-gallery" data-count="4">
+          <div class="gallery-track">
+            <div class="gallery-slide"><img src="./Research/output_image_NIR.png" alt="NIR raw image" /></div>
+            <div class="gallery-slide"><img src="./Research/output_image_CT269.png" alt="CT Porosity detection" /></div>
+            <div class="gallery-slide"><img src="./Research/output_image.png" alt="BSE Porosity detection" /></div>
+            <div class="gallery-slide"><img src="./Research/processed_image_IRdetection.png" alt="NIR IR detection" /></div>
+          </div>
+          <button class="gallery-btn prev" onclick="galShift(this,-1)">‹</button>
+          <button class="gallery-btn next" onclick="galShift(this,1)">›</button>
+          <div class="gallery-dots">
+            <button class="gallery-dot active"></button>
+            <button class="gallery-dot"></button>
+            <button class="gallery-dot"></button>
+            <button class="gallery-dot"></button>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-title">IN-SITU FLAW DETECTION FOR ELECTRON BEAM METAL ADDITIVE PROCESS</div>
+          <div class="proj-desc">
+            Real-time porosity detection and process parameter control for E-beam metal additive process helps to minimize print failure and material wastage. A Python program trained to detect porosity using CT and BSE data is used to identify pores from NIR data, used to adjust beam power, velocity, and hatch spacing.<br><br>
+            <strong>Objective:</strong> Predict porosity for a given layer using NIR data and validate against CT and BSE.<br><br>
+            <strong>Results:</strong> Higher accuracy detecting pores from NIR images vs BSE, with CT validation confirming effectiveness for real-time monitoring.
+          </div>
+        </div>
+      </div>
 
-      <!-- Project 8 (Example with 2 Images) -->
+      <!-- Project 8 -->
       <div class="proj-card">
         <div class="proj-gallery" data-count="3">
           <div class="gallery-track">
             <div class="gallery-slide"><img src="./Research/config1.png" alt="Config 1" /></div>
             <div class="gallery-slide"><img src="./Research/config2.png" alt="Config 2" /></div>
             <div class="gallery-slide"><img src="./Research/config3.png" alt="Config 3" /></div>
-            
           </div>
           <button class="gallery-btn prev" onclick="galShift(this,-1)">‹</button>
           <button class="gallery-btn next" onclick="galShift(this,1)">›</button>
-          <button class="gallery-btn next" onclick="galShift(this,2)">›</button>
           <div class="gallery-dots">
             <button class="gallery-dot active"></button>
             <button class="gallery-dot"></button>
@@ -954,6 +940,7 @@
     </div>
   </div>
 </div>
+
 <!-- ═══════════════════════════ CERTIFICATIONS ════════════════════════════ -->
 <div class="page" id="page-certs">
   <div class="inner-page">
@@ -966,8 +953,7 @@
       <!-- 1 CSWP -->
       <div class="cert-card" onclick="openLightbox('./Certificates/cert-cswp.png')">
         <div class="cert-img-wrap">
-          <img src="./Certificates/cert-cswp.png" alt="CSWP Certificate"
-               >
+          <img src="./Certificates/cert-cswp.png" alt="CSWP Certificate">
         </div>
         <div class="cert-info">
           <div class="cert-name">CSWP — Certified SolidWorks Professional</div>
@@ -978,8 +964,7 @@
       <!-- 2 CSWA -->
       <div class="cert-card" onclick="openLightbox('./Certificates/cert-cswa.png')">
         <div class="cert-img-wrap">
-          <img src="./Certificates/cert-cswa.png" alt="CSWA Certificate"
-               >
+          <img src="./Certificates/cert-cswa.png" alt="CSWA Certificate">
         </div>
         <div class="cert-info">
           <div class="cert-name">CSWA — Certified SolidWorks Associate</div>
@@ -990,8 +975,7 @@
       <!-- 3 General Operations Program -->
       <div class="cert-card" onclick="openLightbox('./Certificates/Biospherix.JPG')">
         <div class="cert-img-wrap">
-          <img src="./Certificates/Biospherix.JPG" alt="BioSpherix Xvivo System"
-     style="transform: rotate(-90deg); object-fit: contain; background: var(--surface2);">
+          <img src="./Certificates/Biospherix.JPG" alt="BioSpherix Xvivo System" style="transform: rotate(-90deg); object-fit: contain; background: var(--surface2);">
         </div>
         <div class="cert-info">
           <div class="cert-name">General Operations Program</div>
@@ -1002,8 +986,7 @@
       <!-- 4 AM Associate -->
       <div class="cert-card" onclick="openLightbox('./Certificates/cert-am.png')">
         <div class="cert-img-wrap">
-          <img src="./Certificates/cert-am.png" alt="AM Associate Certificate"
-               >
+          <img src="./Certificates/cert-am.png" alt="AM Associate Certificate">
         </div>
         <div class="cert-info">
           <div class="cert-name">Additive Manufacturing Associate</div>
@@ -1014,8 +997,7 @@
       <!-- 5 Ansys Hyperelasticity -->
       <div class="cert-card" onclick="openLightbox('./Certificates/cert-ansys.png')">
         <div class="cert-img-wrap">
-          <img src="./Certificates/cert-ansys.png" alt="Ansys Certificate"
-               >
+          <img src="./Certificates/cert-ansys.png" alt="Ansys Certificate">
         </div>
         <div class="cert-info">
           <div class="cert-name">Hyperelasticity Course Completion</div>
@@ -1026,8 +1008,7 @@
       <!-- 6 Reverse Engineering -->
       <div class="cert-card" onclick="openLightbox('./Certificates/cert-re.png')">
         <div class="cert-img-wrap">
-          <img src="./Certificates/cert-re.png" alt="Reverse Engineering Certificate"
-               >
+          <img src="./Certificates/cert-re.png" alt="Reverse Engineering Certificate">
         </div>
         <div class="cert-info">
           <div class="cert-name">Reverse Engineering Foundations: Product Design</div>
@@ -1038,8 +1019,7 @@
       <!-- 7 Fusion 360 -->
       <div class="cert-card" onclick="openLightbox('./Certificates/cert-fusion360.png')">
         <div class="cert-img-wrap">
-          <img src="./Certificates/cert-fusion360.png" alt="Fusion 360 Certificate"
-               >
+          <img src="./Certificates/cert-fusion360.png" alt="Fusion 360 Certificate">
         </div>
         <div class="cert-info">
           <div class="cert-name">Fusion 360 CAD/CAM/CAE</div>
@@ -1050,8 +1030,7 @@
       <!-- 8 Lean Six Sigma -->
       <div class="cert-card" onclick="openLightbox('./Certificates/cert-sixsigma.png')">
         <div class="cert-img-wrap">
-          <img src="./Certificates/cert-sixsigma.png" alt="Lean Six Sigma Certificate"
-               >
+          <img src="./Certificates/cert-sixsigma.png" alt="Lean Six Sigma Certificate">
         </div>
         <div class="cert-info">
           <div class="cert-name">Lean Six Sigma Foundations</div>
@@ -1062,8 +1041,7 @@
       <!-- 9 GD&T -->
       <div class="cert-card" onclick="openLightbox('./Certificates/cert-gdt.png')">
         <div class="cert-img-wrap">
-          <img src="./Certificates/cert-gdt.png" alt="GD&T Certificate"
-               >
+          <img src="./Certificates/cert-gdt.png" alt="GD&T Certificate">
         </div>
         <div class="cert-info">
           <div class="cert-name">Introduction to GD&amp;T</div>
@@ -1074,8 +1052,7 @@
       <!-- 10 OSHA -->
       <div class="cert-card" onclick="openLightbox('./Certificates/cert-osha.png')">
         <div class="cert-img-wrap">
-          <img src="./Certificates/cert-osha.png" alt="OSHA Certificate"
-               >
+          <img src="./Certificates/cert-osha.png" alt="OSHA Certificate">
         </div>
         <div class="cert-info">
           <div class="cert-name">OSHA 10-Hour Outreach Training — General Industry</div>
