@@ -5,10 +5,264 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Adhithya Anandram — R&D Engineer</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  
-  <!-- LINKING YOUR NEW CSS FILE -->
-  <link rel="stylesheet" href="style.css" />
-  
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #000000;
+      --surface:      #111113;
+      --surface2:     #1d1d1f;
+      --border:       rgba(255, 255, 255, 0.08);
+      --text:         #f5f5f7;
+      --text-mid:     #a1a1a6;
+      --text-dim:     #6e6e73;
+      --accent:       #2997ff;
+      --accent-glow:  rgba(41, 151, 255, 0.15);
+      --ease-apple:   cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    /* Custom Sleek Scrollbar */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; border: 2px solid var(--bg); }
+    ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px;
+      height: 54px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-size: 17px; font-weight: 600;
+      color: var(--text); letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--text-mid); font-weight: 400; }
+    .nav-tabs { display: flex; gap: 8px; list-style: none; }
+    .nav-tabs a {
+      text-decoration: none; display: inline-block;
+      font-family: inherit; font-size: 12px; font-weight: 400;
+      color: var(--text-mid);
+      padding: 6px 12px; border-radius: 99px;
+      transition: color 0.3s var(--ease-apple), background 0.3s var(--ease-apple);
+      letter-spacing: 0.01em;
+    }
+    .nav-tabs a:hover { color: var(--text); }
+    .nav-tabs a.active { color: var(--text); background: var(--surface2); }
+
+    /* ── SECTIONS ── */
+    .content-section {
+      padding-top: 80px; 
+      scroll-margin-top: 54px; /* Prevents anchor links from hiding under the fixed nav */
+    }
+
+    /* ── HERO PAGE ── */
+    .hero-page {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 0 20px; text-align: center;
+    }
+    .hero-eyebrow {
+      font-size: 13px; font-weight: 600; color: var(--text-dim);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .hero-page h1 {
+      font-size: clamp(48px, 8vw, 96px); font-weight: 700; line-height: 1.05;
+      letter-spacing: -0.04em; color: var(--text); max-width: 980px; margin-bottom: 24px;
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #2997ff 0%, #30c3ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(18px, 2vw, 24px); font-weight: 400; color: var(--text-mid);
+      max-width: 720px; line-height: 1.5; margin-bottom: 40px; letter-spacing: -0.01em;
+    }
+    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 28px; background: var(--text); color: var(--bg);
+      font-family: inherit; font-size: 15px; font-weight: 600;
+      text-decoration: none; border-radius: 999px; border: none; cursor: pointer;
+      transition: transform 0.3s var(--ease-apple), opacity 0.3s;
+    }
+    .btn-primary:hover { transform: scale(1.03); opacity: 0.9; }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 28px; border: none; color: var(--text);
+      font-family: inherit; font-size: 15px; font-weight: 500;
+      text-decoration: none; border-radius: 999px; background: var(--surface2); cursor: pointer;
+      transition: background 0.3s var(--ease-apple), transform 0.3s var(--ease-apple);
+    }
+    .btn-secondary:hover { background: #2c2c2e; transform: scale(1.03); }
+
+    /* ── INNER PAGE LAYOUT ── */
+    .inner-page { max-width: 980px; margin: 0 auto; padding-bottom: 120px; }
+    .page-header { margin-bottom: 64px; text-align: center; }
+    .page-title { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.03em; color: var(--text); }
+    .page-label { font-size: 15px; font-weight: 500; color: var(--accent); margin-bottom: 8px; }
+
+    /* ── Advanced Bento Box Cards with Hover Glow ── */
+    .bento-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      transition: transform 0.4s var(--ease-apple), box-shadow 0.4s var(--ease-apple), border-color 0.4s var(--ease-apple);
+      position: relative;
+      z-index: 1;
+    }
+    .bento-card:hover {
+      transform: scale(1.01) translateY(-2px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px var(--accent-glow);
+      border-color: rgba(255, 255, 255, 0.15);
+      z-index: 2;
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-grid { display: flex; flex-direction: column; gap: 24px; padding: 0 40px; }
+    .exp-card { display: grid; grid-template-columns: 72px 1fr; gap: 28px; padding: 40px; }
+    .exp-logo-col { display: flex; flex-direction: column; align-items: center; }
+    .logo-placeholder {
+      width: 72px; height: 72px; border-radius: 18px; background: #ffffff; padding: 8px;
+      display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+    }
+    .logo-placeholder img { width: 100%; height: 100%; object-fit: contain; }
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+    .exp-title { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; color: var(--text); }
+    .exp-date { font-size: 14px; font-weight: 500; color: var(--text-dim); }
+    .exp-org { font-size: 15px; color: var(--accent); margin-bottom: 20px; font-weight: 500; }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .exp-bullets li { font-size: 15px; color: var(--text-mid); padding-left: 20px; position: relative; line-height: 1.6; }
+    .exp-bullets li::before { content: '•'; position: absolute; left: 0; top: 0; color: var(--text-dim); font-size: 18px; }
+    .exp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .tag { font-size: 12px; font-weight: 500; color: var(--text-mid); background: var(--surface2); border: 1px solid var(--border); padding: 6px 12px; border-radius: 99px; }
+
+    /* ── PROJECTS ── */
+    .proj-grid { display: flex; flex-direction: column; gap: 40px; padding: 0 40px; }
+    .proj-card { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+    .proj-gallery { position: relative; width: 100%; height: 420px; background: #09090a; border-bottom: 1px solid var(--border); }
+    .gallery-track { display: flex; height: 100%; transition: transform 0.5s var(--ease-apple); }
+    .gallery-slide { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .gallery-slide img { width: 100%; height: 100%; object-fit: contain; }
+    .gallery-btn {
+      position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+      border: none; color: #fff; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 18px; transition: background 0.3s, transform 0.3s; z-index: 2;
+    }
+    .gallery-btn:hover { background: rgba(255,255,255,0.2); transform: translateY(-50%) scale(1.1); }
+    .gallery-btn.prev { left: 16px; }
+    .gallery-btn.next { right: 16px; }
+    .proj-gallery[data-count="1"] .gallery-btn { display: none; }
+    .gallery-dots {
+      position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 2;
+      background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); padding: 6px 10px; border-radius: 99px;
+    }
+    .gallery-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; border: none; padding: 0; transition: background 0.3s, transform 0.3s; }
+    .gallery-dot.active { background: #fff; transform: scale(1.3); }
+    .proj-gallery[data-count="1"] .gallery-dots { display: none; }
+    .proj-body { padding: 40px; }
+    .proj-title { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; color: var(--text); margin-bottom: 12px; }
+    .proj-desc { font-size: 15px; color: var(--text-mid); line-height: 1.6; }
+    .proj-desc strong { color: var(--text); font-weight: 600; }
+
+    /* ── CERTIFICATIONS ── */
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; padding: 0 40px; }
+    .cert-card { padding: 0; cursor: pointer; }
+    .cert-img-wrap { width: 100%; aspect-ratio: 4/3; background: #000; border-bottom: 1px solid var(--border); overflow: hidden; }
+    .cert-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease-apple); }
+    .cert-card:hover .cert-img-wrap img { transform: scale(1.05); }
+    .cert-info { padding: 24px; }
+    .cert-name { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 4px; letter-spacing: -0.01em; }
+    .cert-issuer { font-size: 14px; color: var(--accent); font-weight: 500; }
+
+    /* Lightbox */
+    .cert-lightbox {
+      display: none; position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);
+      align-items: center; justify-content: center; padding: 24px; opacity: 0; transition: opacity 0.3s;
+    }
+    .cert-lightbox.open { display: flex; opacity: 1; }
+    .cert-lightbox img { max-width: 90vw; max-height: 88vh; border-radius: 12px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); transform: scale(0.95); transition: transform 0.3s var(--ease-apple); }
+    .cert-lightbox.open img { transform: scale(1); }
+    .cert-lightbox-close {
+      position: absolute; top: 30px; right: 40px; background: rgba(255,255,255,0.1); border: none; color: #fff;
+      width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 24px; display: flex; align-items: center; justify-content: center; transition: background 0.3s;
+    }
+    .cert-lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+    /* ── EDUCATION ── */
+    .edu-grid { display: flex; flex-direction: column; gap: 24px; padding: 0 40px; }
+    .edu-card { display: grid; grid-template-columns: 64px 1fr; gap: 24px; align-items: center; padding: 32px; }
+    .edu-logo-col img { width: 64px; height: 64px; border-radius: 16px; object-fit: contain; background: #fff; padding: 4px; }
+    .edu-degree { font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 4px; letter-spacing: -0.01em; }
+    .edu-school { font-size: 15px; color: var(--accent); font-weight: 500; margin-bottom: 8px; }
+    .edu-note { font-size: 14px; color: var(--text-mid); line-height: 1.5; margin-bottom: 8px;}
+    .edu-date { font-size: 13px; color: var(--text-dim); font-weight: 500; }
+
+    /* ── CONTACT ── */
+    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; padding: 0 40px; }
+    .contact-intro-title { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; color: var(--text); margin-bottom: 16px; }
+    .contact-intro-text { font-size: 16px; color: var(--text-mid); line-height: 1.6; }
+    .contact-links { display: flex; flex-direction: column; gap: 16px; }
+    .contact-link {
+      display: flex; align-items: center; gap: 20px; text-decoration: none; color: var(--text-mid);
+      padding: 20px 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; transition: all 0.3s var(--ease-apple);
+    }
+    .contact-link:hover { background: var(--surface2); transform: scale(1.02); border-color: rgba(255,255,255,0.15); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+    .contact-link-icon { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; flex-shrink: 0; color: var(--text); transition: color 0.3s; }
+    .contact-link:hover .contact-link-icon { color: var(--accent); }
+    .contact-link-main { font-size: 16px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
+    .contact-link-label { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; max-width: 980px; margin: 0 auto; }
+    footer p { font-size: 13px; color: var(--text-dim); font-weight: 500; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; overflow-x: auto; white-space: nowrap; }
+      .nav-logo { display: none; }
+      .hero-page { padding: 0 20px 60px; }
+      .inner-page { padding: 60px 0 100px; }
+      .exp-grid, .proj-grid, .cert-grid, .edu-grid, .contact-layout { padding: 0 20px; }
+      .bento-card { padding: 24px; border-radius: 20px; }
+      .exp-card { grid-template-columns: 1fr; gap: 16px; }
+      .exp-logo-col { align-items: flex-start; }
+      .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+      .edu-card { grid-template-columns: 1fr; }
+      .proj-gallery { height: 280px; }
+      .proj-body { padding: 24px; }
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal {
+      opacity: 0; transform: translateY(40px) scale(0.98);
+      transition: opacity 0.8s var(--ease-apple), transform 0.8s var(--ease-apple);
+    }
+    .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
+  </style>
 </head>
 <body>
 
@@ -16,41 +270,41 @@
 <nav>
   <div class="nav-logo">Adhithya <span>Anandram</span></div>
   <ul class="nav-tabs">
-    <li><button class="active" onclick="showPage('home', this)">Overview</button></li>
-    <li><button onclick="showPage('experience', this)">Experience</button></li>
-    <li><button onclick="showPage('projects', this)">Projects</button></li>
-    <li><button onclick="showPage('certs', this)">Certifications</button></li>
-    <li><button onclick="showPage('education', this)">Education</button></li>
-    <li><button onclick="showPage('contact', this)">Contact</button></li>
+    <li><a href="#home" class="active">Overview</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certs">Certifications</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
 <!-- ═══════════════════════════════ HOME ═══════════════════════════════ -->
-<div class="page active" id="page-home">
-  <section class="hero-page">
-    <div class="hero-eyebrow">Adhithya Anandram</div>
-    <h1>Precision Engineering.<br /><span class="text-gradient">Clinical Impact.</span></h1>
-    <p class="hero-sub">
+<section class="content-section" id="home">
+  <div class="hero-page">
+    <div class="hero-eyebrow reveal">Adhithya Anandram</div>
+    <h1 class="reveal">Precision Engineering.<br /><span class="text-gradient">Clinical Impact.</span></h1>
+    <p class="hero-sub reveal">
       R&D Mechanical Engineer specializing in advanced medical implants, additive manufacturing, and bio-compatible materials. Bridging the gap between conceptual design and clinical reality.
     </p>
-    <div class="hero-cta">
-      <button class="btn-primary" onclick="showPage('experience', document.querySelector('.nav-tabs button:nth-child(2)'))">Explore Experience</button>
-      <button class="btn-secondary" onclick="showPage('contact', document.querySelector('.nav-tabs button:nth-child(6)'))">Get in Touch</button>
+    <div class="hero-cta reveal">
+      <a href="#experience" class="btn-primary">Explore Experience</a>
+      <a href="#contact" class="btn-secondary">Get in Touch</a>
     </div>
-  </section>
-</div>
+  </div>
+</section>
 
 <!-- ═══════════════════════════ EXPERIENCE ════════════════════════════ -->
-<div class="page" id="page-experience">
+<section class="content-section" id="experience">
   <div class="inner-page">
-    <div class="page-header">
+    <div class="page-header reveal">
       <div class="page-label">Work History</div>
       <h2 class="page-title">Experience.</h2>
     </div>
     <div class="exp-grid">
 
       <!-- Brinter -->
-      <div class="bento-card exp-card">
+      <div class="bento-card exp-card reveal">
         <div class="exp-logo-col">
           <div class="logo-placeholder">
             <img src="./Logos/brinter-logo.png" alt="Brinter" />
@@ -79,7 +333,7 @@
       </div>
 
       <!-- Visiting RA -->
-      <div class="bento-card exp-card">
+      <div class="bento-card exp-card reveal">
         <div class="exp-logo-col">
           <div class="logo-placeholder">
             <img src="./Logos/ncstate-mech-logo.png" alt="NC State" />
@@ -104,7 +358,7 @@
       </div>
 
       <!-- Grad RA -->
-      <div class="bento-card exp-card">
+      <div class="bento-card exp-card reveal">
         <div class="exp-logo-col">
           <div class="logo-placeholder">
             <img src="./Logos/ncstate-mech-logo.png" alt="NC State" />
@@ -129,7 +383,7 @@
       </div>
 
       <!-- Rapid Shape -->
-      <div class="bento-card exp-card">
+      <div class="bento-card exp-card reveal">
         <div class="exp-logo-col">
           <div class="logo-placeholder">
             <img src="./Logos/rapidshape-logo.png" alt="Rapid Shape" />
@@ -153,7 +407,7 @@
       </div>
 
       <!-- Maruti -->
-      <div class="bento-card exp-card">
+      <div class="bento-card exp-card reveal">
         <div class="exp-logo-col">
           <div class="logo-placeholder">
             <img src="./Logos/suzuki-12.png" alt="Maruti Suzuki" />
@@ -178,19 +432,19 @@
 
     </div>
   </div>
-</div>
+</section>
 
 <!-- ═══════════════════════════ PROJECTS ════════════════════════════ -->
-<div class="page" id="page-projects">
+<section class="content-section" id="projects">
   <div class="inner-page">
-    <div class="page-header">
+    <div class="page-header reveal">
       <div class="page-label">Selected Work</div>
       <h2 class="page-title">Projects.</h2>
     </div>
     <div class="proj-grid">
 
       <!-- Project 1 -->
-      <div class="bento-card proj-card">
+      <div class="bento-card proj-card reveal">
         <div class="proj-gallery" data-count="2">
           <div class="gallery-track">
             <div class="gallery-slide"><img src="./Research/vascular_stent.png" alt="Vascular Stent" /></div>
@@ -214,7 +468,7 @@
       </div>
 
       <!-- Project 2 -->
-      <div class="bento-card proj-card">
+      <div class="bento-card proj-card reveal">
         <div class="proj-gallery" data-count="3">
           <div class="gallery-track">
             <div class="gallery-slide"><img src="./Research/Boundary_condition.png" alt="Boundary Condition" /></div>
@@ -240,7 +494,7 @@
       </div>
 
       <!-- Project 3 -->
-      <div class="bento-card proj-card">
+      <div class="bento-card proj-card reveal">
         <div class="proj-gallery" data-count="2">
           <div class="gallery-track">
             <div class="gallery-slide"><img src="./Research/topdown_dlp.png" alt="Topdown DLP" /></div>
@@ -264,7 +518,7 @@
       </div>
 
       <!-- Project 4 -->
-      <div class="bento-card proj-card">
+      <div class="bento-card proj-card reveal">
         <div class="proj-gallery" data-count="4">
           <div class="gallery-track">
             <div class="gallery-slide"><img src="./Research/arrowhead%20stent-TMPTA.png" alt="Arrowhead stent" /></div>
@@ -292,7 +546,7 @@
       </div>
 
       <!-- Project 5 -->
-      <div class="bento-card proj-card">
+      <div class="bento-card proj-card reveal">
         <div class="proj-gallery" data-count="3">
           <div class="gallery-track">
             <div class="gallery-slide"><img src="./Research/micro_textured_mold.png" alt="Micro textured mold" /></div>
@@ -318,7 +572,7 @@
       </div>
 
       <!-- Project 6 -->
-      <div class="bento-card proj-card">
+      <div class="bento-card proj-card reveal">
         <div class="proj-gallery" data-count="4">
           <div class="gallery-track">
             <div class="gallery-slide"><img src="./Research/stress%20on%20spring.png" alt="Stress Contour of Spring" /></div>
@@ -346,7 +600,7 @@
       </div>
 
       <!-- Project 7 -->
-      <div class="bento-card proj-card">
+      <div class="bento-card proj-card reveal">
         <div class="proj-gallery" data-count="4">
           <div class="gallery-track">
             <div class="gallery-slide"><img src="./Research/output_image_NIR.png" alt="NIR raw image" /></div>
@@ -374,7 +628,7 @@
       </div>
 
       <!-- Project 8 -->
-      <div class="bento-card proj-card">
+      <div class="bento-card proj-card reveal">
         <div class="proj-gallery" data-count="3">
           <div class="gallery-track">
             <div class="gallery-slide"><img src="./Research/config1.png" alt="Config 1" /></div>
@@ -401,18 +655,18 @@
 
     </div>
   </div>
-</div>
+</section>
 
 <!-- ═══════════════════════════ CERTIFICATIONS ════════════════════════════ -->
-<div class="page" id="page-certs">
+<section class="content-section" id="certs">
   <div class="inner-page">
-    <div class="page-header">
+    <div class="page-header reveal">
       <div class="page-label">Credentials</div>
       <h2 class="page-title">Certifications.</h2>
     </div>
     <div class="cert-grid" id="certGrid">
 
-      <div class="bento-card cert-card" onclick="openLightbox('./Certificates/cert-cswp.png')">
+      <div class="bento-card cert-card reveal" onclick="openLightbox('./Certificates/cert-cswp.png')">
         <div class="cert-img-wrap"><img src="./Certificates/cert-cswp.png" alt="CSWP Certificate"></div>
         <div class="cert-info">
           <div class="cert-name">CSWP — Certified SolidWorks Professional</div>
@@ -420,7 +674,7 @@
         </div>
       </div>
 
-      <div class="bento-card cert-card" onclick="openLightbox('./Certificates/cert-cswa.png')">
+      <div class="bento-card cert-card reveal" onclick="openLightbox('./Certificates/cert-cswa.png')">
         <div class="cert-img-wrap"><img src="./Certificates/cert-cswa.png" alt="CSWA Certificate"></div>
         <div class="cert-info">
           <div class="cert-name">CSWA — Certified SolidWorks Associate</div>
@@ -428,7 +682,7 @@
         </div>
       </div>
 
-      <div class="bento-card cert-card" onclick="openLightbox('./Certificates/Biospherix.JPG')">
+      <div class="bento-card cert-card reveal" onclick="openLightbox('./Certificates/Biospherix.JPG')">
         <div class="cert-img-wrap"><img src="./Certificates/Biospherix.JPG" alt="BioSpherix Xvivo System" style="transform: rotate(-90deg); object-fit: contain; background: #000;"></div>
         <div class="cert-info">
           <div class="cert-name">General Operations Program</div>
@@ -436,7 +690,7 @@
         </div>
       </div>
       
-      <div class="bento-card cert-card" onclick="openLightbox('./Certificates/cert-am.png')">
+      <div class="bento-card cert-card reveal" onclick="openLightbox('./Certificates/cert-am.png')">
         <div class="cert-img-wrap"><img src="./Certificates/cert-am.png" alt="AM Associate Certificate"></div>
         <div class="cert-info">
           <div class="cert-name">Additive Manufacturing Associate</div>
@@ -444,7 +698,7 @@
         </div>
       </div>
 
-      <div class="bento-card cert-card" onclick="openLightbox('./Certificates/cert-ansys.png')">
+      <div class="bento-card cert-card reveal" onclick="openLightbox('./Certificates/cert-ansys.png')">
         <div class="cert-img-wrap"><img src="./Certificates/cert-ansys.png" alt="Ansys Certificate"></div>
         <div class="cert-info">
           <div class="cert-name">Hyperelasticity Course Completion</div>
@@ -452,7 +706,7 @@
         </div>
       </div>
 
-      <div class="bento-card cert-card" onclick="openLightbox('./Certificates/cert-re.png')">
+      <div class="bento-card cert-card reveal" onclick="openLightbox('./Certificates/cert-re.png')">
         <div class="cert-img-wrap"><img src="./Certificates/cert-re.png" alt="Reverse Engineering Certificate"></div>
         <div class="cert-info">
           <div class="cert-name">Reverse Engineering Foundations</div>
@@ -460,7 +714,7 @@
         </div>
       </div>
 
-      <div class="bento-card cert-card" onclick="openLightbox('./Certificates/cert-fusion360.png')">
+      <div class="bento-card cert-card reveal" onclick="openLightbox('./Certificates/cert-fusion360.png')">
         <div class="cert-img-wrap"><img src="./Certificates/cert-fusion360.png" alt="Fusion 360 Certificate"></div>
         <div class="cert-info">
           <div class="cert-name">Fusion 360 CAD/CAM/CAE</div>
@@ -468,7 +722,7 @@
         </div>
       </div>
 
-      <div class="bento-card cert-card" onclick="openLightbox('./Certificates/cert-sixsigma.png')">
+      <div class="bento-card cert-card reveal" onclick="openLightbox('./Certificates/cert-sixsigma.png')">
         <div class="cert-img-wrap"><img src="./Certificates/cert-sixsigma.png" alt="Lean Six Sigma Certificate"></div>
         <div class="cert-info">
           <div class="cert-name">Lean Six Sigma Foundations</div>
@@ -476,7 +730,7 @@
         </div>
       </div>
 
-      <div class="bento-card cert-card" onclick="openLightbox('./Certificates/cert-gdt.png')">
+      <div class="bento-card cert-card reveal" onclick="openLightbox('./Certificates/cert-gdt.png')">
         <div class="cert-img-wrap"><img src="./Certificates/cert-gdt.png" alt="GD&T Certificate"></div>
         <div class="cert-info">
           <div class="cert-name">Introduction to GD&amp;T</div>
@@ -484,7 +738,7 @@
         </div>
       </div>
 
-      <div class="bento-card cert-card" onclick="openLightbox('./Certificates/cert-osha.png')">
+      <div class="bento-card cert-card reveal" onclick="openLightbox('./Certificates/cert-osha.png')">
         <div class="cert-img-wrap"><img src="./Certificates/cert-osha.png" alt="OSHA Certificate"></div>
         <div class="cert-info">
           <div class="cert-name">OSHA 10-Hour Outreach Training</div>
@@ -494,7 +748,7 @@
 
     </div>
   </div>
-</div>
+</section>
 
 <!-- LIGHTBOX -->
 <div class="cert-lightbox" id="certLightbox" onclick="closeLightbox(event)">
@@ -503,14 +757,14 @@
 </div>
 
 <!-- ═══════════════════════════ EDUCATION ════════════════════════════ -->
-<div class="page" id="page-education">
+<section class="content-section" id="education">
   <div class="inner-page">
-    <div class="page-header">
+    <div class="page-header reveal">
       <div class="page-label">Academic Background</div>
       <h2 class="page-title">Education.</h2>
     </div>
     <div class="edu-grid">
-      <div class="bento-card edu-card">
+      <div class="bento-card edu-card reveal">
         <div class="edu-logo-col">
           <img src="./Logos/nc-logo.png" alt="NC State" />
         </div>
@@ -521,7 +775,7 @@
           <div class="edu-date">Jan 2023 – May 2025</div>
         </div>
       </div>
-      <div class="bento-card edu-card">
+      <div class="bento-card edu-card reveal">
         <div class="edu-logo-col">
           <img src="./Logos/PU-logo.png" alt="Pondicherry University" />
         </div>
@@ -533,23 +787,23 @@
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- ═══════════════════════════ CONTACT ════════════════════════════ -->
-<div class="page" id="page-contact">
+<section class="content-section" id="contact">
   <div class="inner-page">
-    <div class="page-header">
+    <div class="page-header reveal">
       <div class="page-label">Let's Connect</div>
       <h2 class="page-title">Contact.</h2>
     </div>
     <div class="contact-layout">
-      <div class="contact-intro-block">
+      <div class="contact-intro-block reveal">
         <div class="contact-intro-title">Open to new opportunities.</div>
         <p class="contact-intro-text">
           Actively looking for R&amp;D engineering, biomedical device development, and advanced manufacturing roles. I bring hands-on experience in medical implant design, ISO-compliant quality systems, and full product development cycles — from bench prototype to investor demonstration.
         </p>
       </div>
-      <div class="contact-links">
+      <div class="contact-links reveal">
         
         <!-- Email Link -->
         <a class="contact-link" href="mailto:adhithyaa81@gmail.com">
@@ -598,7 +852,7 @@
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- FOOTER -->
 <footer>
@@ -607,13 +861,45 @@
 </footer>
 
 <script>
-  function showPage(id, btn) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-tabs button').forEach(b => b.classList.remove('active'));
-    document.getElementById('page-' + id).classList.add('active');
-    if (btn && btn.classList) btn.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+  // ── DYNAMIC NAV HIGHLIGHT ON SCROLL ──
+  const sections = document.querySelectorAll('.content-section');
+  const navLinks = document.querySelectorAll('.nav-tabs a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      if (scrollY >= (sectionTop - 150)) { // Offset buffer for fixed nav
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href').includes(current)) {
+        link.classList.add('active');
+      }
+    });
+  });
+
+  // ── SCROLL REVEAL ANIMATIONS ──
+  const revealOptions = {
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px"
+  };
+  
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target); // Stop observing once revealed
+      }
+    });
+  }, revealOptions);
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    revealObserver.observe(el);
+  });
 
   // ── GALLERY ──
   function getGallery(btn) { return btn.closest('.proj-gallery'); }
