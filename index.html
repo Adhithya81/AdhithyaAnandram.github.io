@@ -49,7 +49,7 @@
       background: rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border-bottom: 1px solid var(--border);
+      <comment-tag id="1">border-bottom: 1px solid var(--border);</comment-tag id="1" text="Consider removing this hardcoded border and instead adding a 'scrolled' class via JavaScript when the user scrolls past 10px. This makes the nav completely invisible while at the top of the page (blending perfectly with the hero), and it elegantly 'appears' only when needed." type="suggestion">
     }
     .nav-logo {
       font-size: 17px; font-weight: 600;
@@ -75,8 +75,11 @@
     }
 
     /* ── HERO PAGE ── */
-    .hero-page {
-      min-height: 100vh;
+    <comment-tag id="2">.hero-page {
+      min-height: 100vh;</comment-tag id="2" text="A pure black background is minimalist, but adding a faint radial gradient here creates depth and draws the eye to your name. 
+      
+Try adding:
+background: radial-gradient(circle at 50% 30%, rgba(41, 151, 255, 0.1) 0%, transparent 60%);" type="suggestion">
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       padding: 0 20px; text-align: center;
     }
@@ -158,7 +161,11 @@
     .exp-bullets li { font-size: 15px; color: var(--text-mid); padding-left: 20px; position: relative; line-height: 1.6; }
     .exp-bullets li::before { content: '•'; position: absolute; left: 0; top: 0; color: var(--text-dim); font-size: 18px; }
     .exp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
-    .tag { font-size: 12px; font-weight: 500; color: var(--text-mid); background: var(--surface2); border: 1px solid var(--border); padding: 6px 12px; border-radius: 99px; }
+    <comment-tag id="3">.tag { font-size: 12px; font-weight: 500; color: var(--text-mid); background: var(--surface2); border: 1px solid var(--border); padding: 6px 12px; border-radius: 99px; }</comment-tag id="3" text="Add a hover transition to your tags to make the page feel highly interactive. Recruiters often hover their mouse over specific technologies they are looking for.
+
+Try adding:
+.tag { transition: all 0.2s ease; }
+.tag:hover { color: var(--accent); border-color: var(--accent); background: rgba(41, 151, 255, 0.1); }" type="suggestion">
 
     /* ── PROJECTS ── */
     .proj-grid { display: flex; flex-direction: column; gap: 40px; padding: 0 40px; }
@@ -461,7 +468,7 @@
           <div class="proj-title">Gradient Light Video Projection-Based DLP</div>
           <div class="proj-desc">
             Video projection-based stereolithography (VP-SL) enables high-resolution printing but suffers from voids, poor surface finish, and size limitations. Gradient Light VP-SL (GLVP-SL) uses grayscale masks and continuous resin flow to overcome these challenges.<br><br>
-            <strong>Objectives:</strong> Develop and validate a novel Gradient Light Video Projection-based Stereolithography (GLVP-SL) process with continuous resin flow that can produce void-free, solid 3D objects with good surface quality by optimizing grayscale mask distributions.<br><br>
+            <comment-tag id="4"><strong>Objectives:</strong> Develop and validate a novel Gradient Light Video Projection-based Stereolithography (GLVP-SL) process with continuous resin flow that can produce void-free, solid 3D objects with good surface quality by optimizing grayscale mask distributions.<br><br></comment-tag id="4" text="Instead of using paragraph breaks for 'Objectives' and 'Results', consider wrapping these in distinct <div> blocks with a subtle background color and padding (e.g., background: var(--surface2); padding: 12px; border-radius: 8px; margin-top: 12px;). This prevents it from looking like a 'wall of text' and lets recruiters skim your achievements instantly." type="suggestion">
             <strong>Results:</strong> Using three grayscale masks per layer decreased voids and reduced surface roughness compared to VP-SL. The optimized grayscale distribution ensured consistent curing and defect-free solids across different geometries.
           </div>
         </div>
@@ -844,7 +851,9 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
           </span>
           <div>
-            <div class="contact-link-main">Download Resume (PDF)</div>
+            <comment-tag id="5"><div class="contact-link-main">Download Resume (PDF)</div></comment-tag id="5" text="This is the primary goal of your Contact section! Let's make it stand out from your email and LinkedIn links. 
+
+Consider adding a specific class to this button (e.g., class='contact-link-main text-gradient') so the text glows, or adding a faint background glow to the card itself to draw the eye." type="suggestion">
             <div class="contact-link-label">Latest CV</div>
           </div>
         </a>
